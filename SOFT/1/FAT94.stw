@@ -1,0 +1,16 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=fat94.stp
+Dependencies=
+
+[Project1]
+Filename=..\..\..\fat35\soft\fat35\fat35.stp
+Dependencies=
+[Options]
+ActiveProject=fat94
+ActiveConfig=Debug
+AddSortedElements=1
