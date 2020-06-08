@@ -9,6 +9,11 @@
 @near char t0_cnt0=0,t0_cnt1=0,t0_cnt2=0,t0_cnt3=0,t0_cnt4=0;
 
 //-----------------------------------------------
+//Переменные в EEPROM
+@eeprom short main_cnt_ee				@0x4002;	//Счетчик моторесурса лампы
+@eeprom short timer_period_ee				@0x4008;	//Период работы таймера
+
+//-----------------------------------------------
 //Индикация
 char ind_cnt;
 char ind_out[7]={0b00011000,0b11111011,0b11110111,0b11101111,0b11111111,0b11111111,0b11111111};
@@ -31,20 +36,113 @@ char speed;
 short but_onL_temp;
 char but_stat;
 #define BUT_ON	5
-#define BUT_ONL	9000
+#define BUT_ONL	1000
 
 
 //***********************************************
 //Режимы работы
 typedef enum {mKONST,mTIMER,mLOOP} mode_enum;
 mode_enum mode;
+typedef enum {mpOFF,mpON} mode_phase_enum;
+mode_phase_enum mode_phase;
+
+//***********************************************
+//Управление выходом
+typedef enum {osOFF,osON} out_state_enum;
+out_state_enum out_state;
+
+//***********************************************
+//Подсчет времени
+#define MAX_RESURS	10
+#define SEC_IN_HOUR	20
+#define SEC_IN_MIN	20
+short second_cnt;
+short timer_second_cnt;
+short timer_pause_cnt;
+short loop_wrk_cnt;
+short loop_pause_cnt;
 
 #define butK	254
 #define butK_	126
 #define butT	253
-#define butT_	124
+#define butT_	125
 #define butL	251
 #define butL_	123
+#define butKTL_	120
+//-----------------------------------------------
+void time_hndl(void) 
+{
+if(out_state==osON)
+	{
+	second_cnt++;
+	if(second_cnt>=SEC_IN_HOUR)
+		{
+		second_cnt=0;
+		if(main_cnt_ee)
+			{
+			main_cnt_ee--;
+			if(!main_cnt_ee)
+				{
+				mode_phase=mpOFF;
+				}
+			}
+		}
+	}
+if(timer_pause_cnt)
+	{
+	timer_pause_cnt--;
+	if((timer_pause_cnt==0)&&(main_cnt_ee))
+		{
+		mode_phase=mpON;
+		timer_second_cnt=SEC_IN_MIN*timer_period_ee;
+		}
+	}
+if(timer_second_cnt)
+	{
+	timer_second_cnt--;
+	if(timer_second_cnt==0)
+		{
+		mode_phase=mpOFF;
+		}
+	}
+
+if(mode==mLOOP)
+	{
+	if(loop_wrk_cnt)
+		{
+		loop_wrk_cnt--;
+		mode_phase=mpON;
+		}
+	else if(loop_pause_cnt)
+		{
+		loop_pause_cnt--;
+		mode_phase=mpOFF;
+		}
+	}
+else
+	{
+	loop_wrk_cnt=0;
+	loop_pause_cnt=0;
+	}
+}
+
+//-----------------------------------------------
+void out_hndl(void) 
+{
+if( 	((mode==mKONST)&(mode_phase==mpON)) ||
+	((mode==mTIMER)&(mode_phase==mpON)) ||
+	((mode==mLOOP)&(mode_phase==mpON))
+	)out_state=osON;
+else out_state=osOFF; 
+
+}
+
+//-----------------------------------------------
+void out_drv(void) 
+{
+	
+}
+
 //-----------------------------------------------
 void but_an(void) 
 {
@@ -52,15 +150,67 @@ if(n_but)
 	{
 	if(but==butK)
 		{
-		mode=mKONST;
+		if((mode!=mKONST)&&(main_cnt_ee))
+			{
+			mode=mKONST;
+			mode_phase=mpON;
+			}
+		else
+			{
+			if((mode_phase!=mpON)&&(main_cnt_ee))mode_phase=mpON;
+			//else mode_phase=mpOFF;
+			}
+		}
+	if(but==butK_)
+		{
+		if((mode==mKONST)&&(mode_phase==mpON))
+			{
+			mode_phase=mpOFF;
+			}
 		}
 	if(but==butT)
 		{
-		mode=mTIMER;
+		if(mode!=mTIMER)
+			{
+			mode=mTIMER;
+			mode_phase=mpOFF;
+			timer_pause_cnt=4;
+			}
+		else	if(mode==mTIMER)
+			{
+			if(timer_pause_cnt)	
+				{
+				timer_period_ee=((timer_period_ee/20)+1)*20;
+				if(timer_period_ee>180)timer_period_ee=20;
+				timer_pause_cnt=4;
+				mode_phase=mpOFF;
+				}
+				
+			else if(mode_phase!=mpON)
+				{
+				//timer_period_ee=((timer_period_ee/20)+1)*20;
+				//if(timer_period_ee>180)timer_period_ee=20;
+				timer_pause_cnt=4;
+				//mode_phase=mpON;
+				}
+			}
 		}
+	if(but==butT_)
+		{
+		if((mode==mTIMER)&&(mode_phase==mpON))
+			{
+			mode_phase=mpOFF;
+			}
+		}		
+
 	if(but==butL)
 		{
 		mode=mLOOP;
+		}
+	if(but==butKTL_)
+		{
+		main_cnt_ee=MAX_RESURS;
+		second_cnt=0;
 		}
 	}
 n_but=0;
@@ -190,15 +340,30 @@ void led_hndl(void)
 {
 if(mode==mKONST)
 	{
-	led_stat=0x01;
+	if(mode_phase==mpOFF)led_stat=0x00;
+	else 
+		{
+		if(bFL1)led_stat=0x01;
+		else led_stat=0x01;
+		}
 	}
 else if(mode==mTIMER)
 	{
-	led_stat=0x02;
+	if(mode_phase==mpOFF)led_stat=0x00;
+	else 
+		{
+		if(bFL1)led_stat=0x02;
+		else led_stat=0x02;
+		}
 	}
 else if(mode==mLOOP)
 	{
-	led_stat=0x04;
+	if(mode_phase==mpOFF)led_stat=0x00;
+	else 
+		{
+		if(bFL1)led_stat=0x04;
+		else led_stat=0x04;
+		}
 	}	
 }
 
@@ -231,8 +396,29 @@ for(i=0;i<len;i++)
 //-----------------------------------------------
 void ind_hndl(void) 
 {
-int2indI_slkuf(but, 0, 4, 0, 0);
-//int2indI_slkuf(9, 3, 1, 1, 1);
+if(main_cnt_ee==0)
+	{
+	int2indI_slkuf(main_cnt_ee, 0, 4, 0, 1);	
+	}
+else if(mode==mKONST)
+	{
+	if(mode_phase==mpON)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
+	else int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
+	}
+else if(mode==mTIMER)
+	{
+	if(timer_pause_cnt)int2indI_slkuf(timer_period_ee, 0, 4, 0, 0);
+	else if(mode_phase==mpON)int2indI_slkuf(timer_second_cnt/SEC_IN_MIN, 0, 3, 0, 0);
+	else if(mode_phase==mpOFF)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
+	//if(timer_pause_cnt)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
+			
+		
+	/*if(mode_phase==mpOFF)*/	//int2indI_slkuf(timer_period_ee, 0, 3, 1, 2);
+	//else 				int2indI_slkuf(timer_second_cnt/SEC_IN_MIN, 0, 3, 1, 0);
+	}
+else if(mode==mLOOP)
+	{
+	}
 }
 
 //-----------------------------------------------
@@ -468,7 +654,9 @@ GPIOF->DDR|=(1<<4);*/
 t4_init();
 enableInterrupts();	
 
-
+mode=mKONST;
+mode_phase=mpOFF;
+//wrk_state=wsOFF;
 
 while (1)
 	{
@@ -512,7 +700,7 @@ while (1)
 		{
 		b1Hz=0;
 		led_stat=0;
-		
+		time_hndl();
 		}      	     	      
 	}
 }
