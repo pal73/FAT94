@@ -752,6 +752,7 @@ MIDR3	stm8s.h	1960;"	member	struct:__anon4::__anon5::__anon6
 MIDR3	stm8s.h	2088;"	member	struct:__anon4::__anon5::__anon12
 MIDR4	stm8s.h	1961;"	member	struct:__anon4::__anon5::__anon6
 MIDR4	stm8s.h	2089;"	member	struct:__anon4::__anon5::__anon12
+MIN_IN_LOOP	main.c	59;"	macro	file:
 MSR	stm8s.h	1944;"	member	struct:__anon4
 MTSRH	stm8s.h	1971;"	member	struct:__anon4::__anon5::__anon6
 MTSRH	stm8s.h	2099;"	member	struct:__anon4::__anon5::__anon12
@@ -1193,7 +1194,7 @@ TIM4_PSCR_RESET_VALUE	stm8s.h	939;"	macro
 TIM4_SR1_RESET_VALUE	stm8s.h	936;"	macro
 TIM4_SR1_UIF	stm8s.h	958;"	macro
 TIM4_TypeDef	stm8s.h	928;"	typedef	typeref:struct:TIM4_struct
-TIM4_UPD_Interrupt	main.c	447;"	function	signature:(void)
+TIM4_UPD_Interrupt	main.c	523;"	function	signature:(void)
 TIM4_UPD_Interrupt	stm8_interrupt_vector.c	20;"	prototype	file:	signature:(void)
 TIM4_struct	stm8s.h	914;"	struct
 TIM5	stm8s.h	2469;"	macro
@@ -1521,22 +1522,22 @@ b5Hz	main.c	8;"	variable
 bFL1	main.c	25;"	variable
 bFL2	main.c	25;"	variable
 bFL5	main.c	25;"	variable
-bcd2ind	main.c	253;"	function	signature:(void)
-bcd2ind_zero	main.c	264;"	function	signature:(void)
-bin2bcd_int	main.c	241;"	function	signature:(unsigned short in)
+bcd2ind	main.c	305;"	function	signature:(void)
+bcd2ind_zero	main.c	316;"	function	signature:(void)
+bin2bcd_int	main.c	293;"	function	signature:(unsigned short in)
 bool	stm8s_type.h	65;"	typedef	typeref:enum:__anon13
 but	main.c	32;"	variable
 but0_cnt	main.c	34;"	variable
 but1_cnt	main.c	34;"	variable
-butK	main.c	63;"	macro	file:
-butKTL_	main.c	69;"	macro	file:
-butK_	main.c	64;"	macro	file:
-butL	main.c	67;"	macro	file:
-butL_	main.c	68;"	macro	file:
-butT	main.c	65;"	macro	file:
-butT_	main.c	66;"	macro	file:
-but_an	main.c	126;"	function	signature:(void)
-but_drv	main.c	191;"	function	signature:(void)
+butK	main.c	67;"	macro	file:
+butKTL_	main.c	73;"	macro	file:
+butK_	main.c	68;"	macro	file:
+butL	main.c	71;"	macro	file:
+butL_	main.c	72;"	macro	file:
+butT	main.c	69;"	macro	file:
+butT_	main.c	70;"	macro	file:
+but_an	main.c	157;"	function	signature:(void)
+but_drv	main.c	243;"	function	signature:(void)
 but_n	main.c	32;"	variable
 but_new	main.c	31;"	variable
 but_onL_temp	main.c	36;"	variable
@@ -1549,25 +1550,28 @@ enableInterrupts	stm8s.h	2491;"	macro
 enableInterrupts	stm8s.h	2500;"	macro
 getchar	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\stdio.h	15;"	prototype	signature:(void)
 gets	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\stdio.h	16;"	prototype	signature:(char *s)
-gpio_init	main.c	384;"	function	signature:(void)
+gpio_init	main.c	460;"	function	signature:(void)
 halt	stm8s.h	2498;"	macro
 halt	stm8s.h	2507;"	macro
 ind_cnt	main.c	18;"	variable
-ind_hndl	main.c	363;"	function	signature:(void)
+ind_hndl	main.c	420;"	function	signature:(void)
 ind_out	main.c	19;"	variable
 ind_out_	main.c	24;"	variable
-int2indI_slkuf	main.c	283;"	function	signature:(unsigned short in, char start, char len, char unzero, char fl)
+int2indI_slkuf	main.c	335;"	function	signature:(unsigned short in, char start, char len, char unzero, char fl)
 interrupt_handler	stm8_interrupt_vector.c	9;"	member	struct:interrupt_vector	file:
 interrupt_handler_t	stm8_interrupt_vector.c	5;"	typedef	file:
 interrupt_instruction	stm8_interrupt_vector.c	8;"	member	struct:interrupt_vector	file:
 interrupt_vector	stm8_interrupt_vector.c	7;"	struct	file:
 l_but	main.c	33;"	variable
-led_hndl	main.c	310;"	function	signature:(void)
+led_hndl	main.c	362;"	function	signature:(void)
 led_stat	main.c	27;"	variable
+loop_pause_cnt	main.c	65;"	variable
+loop_wrk_cnt	main.c	64;"	variable
 mKONST	main.c	44;"	enumerator	enum:__anon1	file:
 mLOOP	main.c	44;"	enumerator	enum:__anon1	file:
+mPAUSE	main.c	46;"	enumerator	enum:__anon2	file:
 mTIMER	main.c	44;"	enumerator	enum:__anon1	file:
-main	main.c	555;"	function
+main	main.c	631;"	function
 mode	main.c	45;"	variable
 mode_enum	main.c	44;"	typedef	typeref:enum:__anon1	file:
 mode_phase	main.c	47;"	variable
@@ -1579,8 +1583,8 @@ nop	stm8s.h	2495;"	macro
 nop	stm8s.h	2504;"	macro
 osOFF	main.c	51;"	enumerator	enum:__anon3	file:
 osON	main.c	51;"	enumerator	enum:__anon3	file:
-out_drv	main.c	120;"	function	signature:(void)
-out_hndl	main.c	109;"	function	signature:(void)
+out_drv	main.c	151;"	function	signature:(void)
+out_hndl	main.c	140;"	function	signature:(void)
 out_state	main.c	52;"	variable
 out_state_enum	main.c	51;"	typedef	typeref:enum:__anon3	file:
 printf	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\stdio.h	17;"	prototype	signature:(char *format, ...)
@@ -1594,7 +1598,7 @@ sc16	stm8s_type.h	33;"	typedef
 sc32	stm8s_type.h	32;"	typedef
 sc8	stm8s_type.h	34;"	typedef
 scanf	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\stdio.h	20;"	prototype	signature:(char *format, ...)
-second_cnt	main.c	59;"	variable
+second_cnt	main.c	61;"	variable
 sim	stm8s.h	2494;"	macro
 sim	stm8s.h	2503;"	macro
 size_t	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\stdio.h	10;"	typedef
@@ -1606,10 +1610,10 @@ t0_cnt1	main.c	9;"	variable
 t0_cnt2	main.c	9;"	variable
 t0_cnt3	main.c	9;"	variable
 t0_cnt4	main.c	9;"	variable
-t4_init	main.c	435;"	function	signature:(void)
-time_hndl	main.c	71;"	function	signature:(void)
-timer_pause_cnt	main.c	61;"	variable
-timer_second_cnt	main.c	60;"	variable
+t4_init	main.c	511;"	function	signature:(void)
+time_hndl	main.c	75;"	function	signature:(void)
+timer_pause_cnt	main.c	63;"	variable
+timer_second_cnt	main.c	62;"	variable
 trap	stm8s.h	2496;"	macro
 trap	stm8s.h	2505;"	macro
 u16	stm8s_type.h	45;"	typedef

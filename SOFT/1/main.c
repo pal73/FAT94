@@ -43,7 +43,7 @@ char but_stat;
 //Режимы работы
 typedef enum {mKONST,mTIMER,mLOOP} mode_enum;
 mode_enum mode;
-typedef enum {mpOFF,mpON} mode_phase_enum;
+typedef enum {mpOFF, mpON, mpPAUSE} mode_phase_enum;
 mode_phase_enum mode_phase;
 
 //***********************************************
@@ -53,9 +53,11 @@ out_state_enum out_state;
 
 //***********************************************
 //Подсчет времени
-#define MAX_RESURS	10
+#define MAX_RESURS	60
 #define SEC_IN_HOUR	20
 #define SEC_IN_MIN	20
+#define MIN_IN_LOOP	10
+
 short second_cnt;
 short timer_second_cnt;
 short timer_pause_cnt;
@@ -112,11 +114,19 @@ if(mode==mLOOP)
 		{
 		loop_wrk_cnt--;
 		mode_phase=mpON;
+		if(loop_wrk_cnt<=0)
+			{
+			loop_pause_cnt=SEC_IN_MIN*MIN_IN_LOOP;
+			}
 		}
 	else if(loop_pause_cnt)
 		{
 		loop_pause_cnt--;
-		mode_phase=mpOFF;
+		mode_phase=mpPAUSE;
+		if(loop_pause_cnt<=0)
+			{
+			loop_wrk_cnt=SEC_IN_MIN*MIN_IN_LOOP;
+			}		
 		}
 	}
 else
@@ -205,8 +215,21 @@ if(n_but)
 
 	if(but==butL)
 		{
-		mode=mLOOP;
+		if((mode!=mLOOP)||(mode_phase==mpOFF))
+			{
+			mode=mLOOP;
+			loop_wrk_cnt=SEC_IN_MIN*MIN_IN_LOOP;
+			}
 		}
+	if(but==butL_)
+		{
+		if((mode==mLOOP))
+			{
+			mode_phase=mpOFF;
+			loop_wrk_cnt=0;
+			loop_pause_cnt=0;
+			}
+		}		
 	if(but==butKTL_)
 		{
 		main_cnt_ee=MAX_RESURS;
@@ -396,7 +419,7 @@ for(i=0;i<len;i++)
 //-----------------------------------------------
 void ind_hndl(void) 
 {
-if(main_cnt_ee==0)
+if((main_cnt_ee==0)&&(mode_phase==mpOFF))
 	{
 	int2indI_slkuf(main_cnt_ee, 0, 4, 0, 1);	
 	}
@@ -408,7 +431,7 @@ else if(mode==mKONST)
 else if(mode==mTIMER)
 	{
 	if(timer_pause_cnt)int2indI_slkuf(timer_period_ee, 0, 4, 0, 0);
-	else if(mode_phase==mpON)int2indI_slkuf(timer_second_cnt/SEC_IN_MIN, 0, 3, 0, 0);
+	else if(mode_phase==mpON)int2indI_slkuf((timer_second_cnt/SEC_IN_MIN)+1, 0, 3, 0, 0);
 	else if(mode_phase==mpOFF)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
 	//if(timer_pause_cnt)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
 			
@@ -418,6 +441,22 @@ else if(mode==mTIMER)
 	}
 else if(mode==mLOOP)
 	{
+	if(mode_phase==mpOFF)int2indI_slkuf(main_cnt_ee, 0, 4, 0, 0);
+	else if(mode_phase==mpON)
+		{
+		int2indI_slkuf((loop_wrk_cnt/SEC_IN_MIN)+1, 0, 4, 0, 0);	
+		//int2indI_slkuf(main_cnt_ee, 2, 2, 0, 0);
+		}
+	else if(mode_phase==mpPAUSE)	
+		{
+		ind_out[0]=0b00001001;
+		ind_out[1]=0b00001010;
+		ind_out[2]=0b00010000;
+		ind_out[3]=0b10010100;
+		
+		
+		
+		}
 	}
 }
 
