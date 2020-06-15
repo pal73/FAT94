@@ -25,6 +25,7 @@ char ind_out_[5];
 bool bFL5, bFL2, bFL1;
 bool zero_on;
 char led_stat;
+short dark_on_cnt;
 
 //-----------------------------------------------
 //Обработка кнопок
@@ -85,7 +86,7 @@ if(out_state==osON)
 			main_cnt_ee--;
 			if(!main_cnt_ee)
 				{
-				mode_phase=mpOFF;
+				//mode_phase=mpOFF;
 				}
 			}
 		}
@@ -139,9 +140,9 @@ else
 //-----------------------------------------------
 void out_hndl(void) 
 {
-if( 	((mode==mKONST)&(mode_phase==mpON)) ||
-	((mode==mTIMER)&(mode_phase==mpON)) ||
-	((mode==mLOOP)&(mode_phase==mpON))
+if( 	((mode==mKONST)&&(mode_phase==mpON)) ||
+	((mode==mTIMER)&&(mode_phase==mpON)) ||
+	((mode==mLOOP)&&(mode_phase==mpON))
 	)out_state=osON;
 else out_state=osOFF; 
 
@@ -150,7 +151,11 @@ else out_state=osOFF;
 //-----------------------------------------------
 void out_drv(void) 
 {
-	
+if(out_state==osON)
+	{
+	GPIOA->ODR|=(1<<3);	
+	}
+else GPIOA->ODR&=~(1<<3);
 }
 
 //-----------------------------------------------
@@ -158,6 +163,7 @@ void but_an(void)
 {
 if(n_but)
 	{
+	dark_on_cnt=100;
 	if(but==butK)
 		{
 		if((mode!=mKONST)&&(main_cnt_ee))
@@ -488,21 +494,11 @@ void gpio_init(void){
 //	GPIOD->CR1&=~0x01;
 //	GPIOD->CR2&=~0x01;
 //	GPIOD->DDR|=0x01;	
+	//Выход на дампу
+	GPIOA->DDR|=(1<<3);
+	GPIOA->CR1|=(1<<3);
+	GPIOA->CR2&=~(1<<3);
 
-#ifdef FORGSM
-//вход от гашетки на новом месте 
-	GPIOB->DDR&=~(1<<5);	
-	GPIOB->CR1|=(1<<5);
-	GPIOB->CR2&=~(1<<5);
-	
-/*	для UARTa GPIOD->DDR&=~(1<<5);	
-	GPIOD->CR1|=(1<<5);
-	GPIOD->CR2&=~(1<<5);*/
-#endif
-#ifndef FORGSM
-//вход от гашетки
-
-#endif
 
 	GPIOB->DDR&=~(1<<5);	
 	GPIOB->CR1|=(1<<5);
@@ -539,9 +535,9 @@ GPIOA->ODR&=(ind_out[ind_cnt]<<1)|0xf9;
 GPIOD->ODR|=0x7c;
 GPIOD->ODR&=(ind_out[ind_cnt])|0x83;
 
+if(dark_on_cnt)dark_on_cnt--;
+else GPIOC->ODR&=~(0x10<<ind_cnt);
 
-
-GPIOC->ODR&=~(0x10<<ind_cnt);
 if(ind_cnt==4)
 	{
 	GPIOC->ODR&=~(0x10);
