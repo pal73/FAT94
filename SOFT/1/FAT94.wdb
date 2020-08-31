@@ -53,7 +53,7 @@ ptn_Child43=Bar-42
 
 [WorkState_v1_2.DockState.Bar-0]
 BarID=59419
-Bars=35
+Bars=36
 Bar#0=0
 Bar#1=59647
 Bar#2=0
@@ -89,6 +89,7 @@ Bar#31=0
 Bar#32=0
 Bar#33=0
 Bar#34=0
+Bar#35=0
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -218,7 +219,7 @@ ResourceID=0
 
 [WorkState_v1_2.DockState.Bar-4]
 BarID=59420
-Bars=56
+Bars=59
 Bar#0=0
 Bar#1=5708
 Bar#2=5720
@@ -275,6 +276,9 @@ Bar#52=0
 Bar#53=0
 Bar#54=0
 Bar#55=0
+Bar#56=0
+Bar#57=0
+Bar#58=0
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -557,7 +561,7 @@ ptn_Child1=ToolBarInfoEx
 
 [WorkState_v1_2.DockState.Bar-11.ToolBarInfoEx]
 Title=View
-Buttons=IFGBAAAAAAJFGBAAAAAAAAAAAAAAAAFEGBAAAAAAIEGBAAAAAAMBJIAAAAAAMEGBAAAAAAAAAAAAAAAAOEGBAAAAAAKEGBAAAAAALEGBAAAAAAPEGBAAAAAA
+Buttons=IFGBAAAAAAJFGBAAAAAAAAAAAAAAAAFEGBAAAAAACEPBAAAAAAMBJIAAAAAAMEGBAAAAAAAAAAAAAAAAOEGBAAAAAAKEGBAAAAAALEGBAAAAAAPEGBAAAAAADEPBAAAAAA
 
 [WorkState_v1_2.DockState.Bar-12]
 BarID=59398
@@ -648,7 +652,7 @@ Docking=True
 MRUDockID=59419
 MRUDockLeftPos=731
 MRUDockTopPos=28
-MRUDockRightPos=771
+MRUDockRightPos=863
 MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-1
@@ -663,7 +667,7 @@ LastAlignedDocking=0
 PctWidth=333333
 MRUFloatCX=40
 MRUFloatCY=30
-MRUHorzDockCX=40
+MRUHorzDockCX=132
 MRUHorzDockCY=30
 MRUVertDockCX=31
 MRUVertDockCY=39
@@ -677,7 +681,7 @@ ptn_Child1=ToolBarInfoEx
 
 [WorkState_v1_2.DockState.Bar-14.ToolBarInfoEx]
 Title=Debug instrument
-Buttons=JPAIAAAAAA
+Buttons=JPAIAAAAAAAFPBAAAAAANEPBAAAAAABFPBAAAAAACFPBAAAAAA
 
 [WorkState_v1_2.DockState.Bar-15]
 BarID=59401
@@ -851,7 +855,7 @@ MDIChild=False
 AutoHide=False
 AutoHidePinned=False
 LastAlignedDocking=0
-PctWidth=333333
+PctWidth=1000000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=1679
@@ -867,15 +871,14 @@ ResourceID=0
 
 [WorkState_v1_2.DockState.Bar-20]
 BarID=5701
-Visible=False
-XPos=0
-YPos=0
+XPos=5
+YPos=-2
 Docking=True
 MRUDockID=0
-MRUDockLeftPos=8
-MRUDockTopPos=26
-MRUDockRightPos=8
-MRUDockBottomPos=26
+MRUDockLeftPos=5
+MRUDockTopPos=-2
+MRUDockRightPos=155
+MRUDockBottomPos=722
 MRUFloatStyle=4
 MRUFloatXPos=-1
 MRUFloatYPos=0
@@ -892,7 +895,7 @@ MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
 MRUVertDockCX=150
-MRUVertDockCY=180
+MRUVertDockCY=724
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -1418,6 +1421,76 @@ Title=ToolBar6
 Buttons=JPAIAAAAAAIFGBAAAAAAFEGBAAAAAAOEGBAAAAAA
 
 [WorkState_v1_2.DockState.Bar-36]
+BarID=8002
+Visible=False
+XPos=0
+YPos=0
+Docking=True
+MRUDockID=0
+MRUDockLeftPos=8
+MRUDockTopPos=26
+MRUDockRightPos=829634677
+MRUDockBottomPos=1747858250
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=1052
+Style=36740
+ExStyle=69393
+PrevFloating=False
+MDIChild=False
+AutoHide=False
+AutoHidePinned=False
+LastAlignedDocking=0
+PctWidth=500000
+MRUFloatCX=300
+MRUFloatCY=180
+MRUHorzDockCX=300
+MRUHorzDockCY=150
+MRUVertDockCX=300
+MRUVertDockCY=180
+MRUDockingState=0
+DockingStyle=61440
+TypeID=0
+ClassName=CAddedControlBar
+WindowName=Core Registers
+ResourceID=0
+
+[WorkState_v1_2.DockState.Bar-37]
+BarID=8003
+Visible=False
+XPos=0
+YPos=0
+Docking=True
+MRUDockID=0
+MRUDockLeftPos=8
+MRUDockTopPos=26
+MRUDockRightPos=808547136
+MRUDockBottomPos=577252941
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=1052
+Style=36740
+ExStyle=69393
+PrevFloating=False
+MDIChild=False
+AutoHide=False
+AutoHidePinned=False
+LastAlignedDocking=0
+PctWidth=666665
+MRUFloatCX=300
+MRUFloatCY=180
+MRUHorzDockCX=300
+MRUHorzDockCY=150
+MRUVertDockCX=300
+MRUVertDockCY=180
+MRUDockingState=0
+DockingStyle=61440
+TypeID=0
+ClassName=CAddedControlBar
+WindowName=Peripheral Registers
+ResourceID=0
+
+[WorkState_v1_2.DockState.Bar-38]
 BarID=59423
 Horz=True
 Floating=True
@@ -1448,7 +1521,7 @@ ClassName=
 WindowName=
 ResourceID=0
 
-[WorkState_v1_2.DockState.Bar-37]
+[WorkState_v1_2.DockState.Bar-39]
 BarID=59423
 Horz=True
 Floating=True
@@ -1479,7 +1552,7 @@ ClassName=
 WindowName=
 ResourceID=0
 
-[WorkState_v1_2.DockState.Bar-38]
+[WorkState_v1_2.DockState.Bar-40]
 BarID=59423
 Horz=True
 Floating=True
@@ -1510,7 +1583,7 @@ ClassName=
 WindowName=
 ResourceID=0
 
-[WorkState_v1_2.DockState.Bar-39]
+[WorkState_v1_2.DockState.Bar-41]
 BarID=59423
 Horz=True
 Floating=True
@@ -1541,7 +1614,7 @@ ClassName=
 WindowName=
 ResourceID=0
 
-[WorkState_v1_2.DockState.Bar-40]
+[WorkState_v1_2.DockState.Bar-42]
 BarID=59423
 Horz=True
 Floating=True
@@ -1570,76 +1643,6 @@ DockingStyle=0
 TypeID=0
 ClassName=
 WindowName=
-ResourceID=0
-
-[WorkState_v1_2.DockState.Bar-41]
-BarID=8002
-Visible=False
-XPos=0
-YPos=0
-Docking=True
-MRUDockID=0
-MRUDockLeftPos=0
-MRUDockTopPos=0
-MRUDockRightPos=829634669
-MRUDockBottomPos=1747858224
-MRUFloatStyle=4
-MRUFloatXPos=-2147483648
-MRUFloatYPos=1126309920
-Style=36740
-ExStyle=69393
-PrevFloating=False
-MDIChild=False
-AutoHide=False
-AutoHidePinned=False
-LastAlignedDocking=0
-PctWidth=500000
-MRUFloatCX=300
-MRUFloatCY=180
-MRUHorzDockCX=300
-MRUHorzDockCY=150
-MRUVertDockCX=300
-MRUVertDockCY=180
-MRUDockingState=0
-DockingStyle=61440
-TypeID=0
-ClassName=CAddedControlBar
-WindowName=Core Registers
-ResourceID=0
-
-[WorkState_v1_2.DockState.Bar-42]
-BarID=8003
-Visible=False
-XPos=0
-YPos=0
-Docking=True
-MRUDockID=0
-MRUDockLeftPos=0
-MRUDockTopPos=0
-MRUDockRightPos=808547128
-MRUDockBottomPos=577252915
-MRUFloatStyle=4
-MRUFloatXPos=-2147483648
-MRUFloatYPos=977478176
-Style=36740
-ExStyle=69393
-PrevFloating=False
-MDIChild=False
-AutoHide=False
-AutoHidePinned=False
-LastAlignedDocking=0
-PctWidth=666666
-MRUFloatCX=300
-MRUFloatCY=180
-MRUHorzDockCX=300
-MRUHorzDockCY=150
-MRUVertDockCX=300
-MRUVertDockCY=180
-MRUDockingState=0
-DockingStyle=61440
-TypeID=0
-ClassName=CAddedControlBar
-WindowName=Peripheral Registers
 ResourceID=0
 
 [WorkState_v1_2.ToolBarMgr]

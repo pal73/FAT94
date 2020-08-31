@@ -26,42 +26,10 @@ AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
-[Document3]
-DocumentPath=CAMtastic1.Cam
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-[Document4]
-DocumentPath=CAMtastic2.Cam
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
 [GeneratedDocument1]
-DocumentPath=Project Outputs for FAT94\fat94.DRL
+DocumentPath=Project Outputs for FAT94\fat94.BOM
 [GeneratedDocument2]
-DocumentPath=Project Outputs for FAT94\fat94.DRR
-[GeneratedDocument3]
-DocumentPath=Project Outputs for FAT94\fat94.GBL
-[GeneratedDocument4]
-DocumentPath=Project Outputs for FAT94\fat94.GBS
-[GeneratedDocument5]
-DocumentPath=Project Outputs for FAT94\fat94.GKO
-[GeneratedDocument6]
-DocumentPath=Project Outputs for FAT94\fat94.GTL
-[GeneratedDocument7]
-DocumentPath=Project Outputs for FAT94\fat94.GTS
-[GeneratedDocument8]
-DocumentPath=Project Outputs for FAT94\fat94.LDP
-[GeneratedDocument9]
-DocumentPath=Project Outputs for FAT94\fat94.REP
-[GeneratedDocument10]
-DocumentPath=Project Outputs for FAT94\fat94.RUL
-[GeneratedDocument11]
-DocumentPath=Project Outputs for FAT94\fat94.TXT
+DocumentPath=Project Outputs for FAT94\fat94.CSV
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
@@ -250,6 +218,14 @@ OutputName1=Bill of Materials
 OutputDocumentPath1=
 OutputEnabled1=1
 OutputDefault1=0
+Configuration1_Name1=General
+Configuration1_Item1=OpenExported=False|ForceFit=False|TemplateFilename=|BatchMode=0|FormWidth=875|FormHeight=659
+Configuration1_Name2=GroupOrder
+Configuration1_Item2=Comment=True
+Configuration1_Name3=SortOrder
+Configuration1_Item3=Designator=Up|Comment=Up|Footprint=Up
+Configuration1_Name4=VisibleOrder
+Configuration1_Item4=Comment=100|Designator=494|Footprint=100|Quantity=100
 OutputType2=ComponentCrossReference
 OutputName2=Component Cross Reference Report
 OutputDocumentPath2=
@@ -265,6 +241,8 @@ OutputName4=Simple BOM
 OutputDocumentPath4=
 OutputEnabled4=1
 OutputDefault4=0
+Configuration4_Name1=OutputConfigurationParameter1
+Configuration4_Item1=Record=SimpleBOMView|SimpleBOMMode=0
 [OutputGroup7]
 Name=Other Outputs
 Description=

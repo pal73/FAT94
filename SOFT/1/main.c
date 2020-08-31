@@ -38,6 +38,7 @@ short but_onL_temp;
 char but_stat;
 #define BUT_ON	5
 #define BUT_ONL	1000
+char main_cnt_reset;
 
 
 //***********************************************
@@ -54,10 +55,16 @@ out_state_enum out_state;
 
 //***********************************************
 //Подсчет времени
+/*
 #define MAX_RESURS	60
 #define SEC_IN_HOUR	20
 #define SEC_IN_MIN	20
 #define MIN_IN_LOOP	10
+*/
+#define MAX_RESURS	8000
+#define SEC_IN_HOUR	3600
+#define SEC_IN_MIN	60
+#define MIN_IN_LOOP	60
 
 short second_cnt;
 short timer_second_cnt;
@@ -163,7 +170,6 @@ void but_an(void)
 {
 if(n_but)
 	{
-	dark_on_cnt=100;
 	if(but==butK)
 		{
 		if((mode!=mKONST)&&(main_cnt_ee))
@@ -179,6 +185,7 @@ if(n_but)
 		}
 	if(but==butK_)
 		{
+		dark_on_cnt=100;
 		if((mode==mKONST)&&(mode_phase==mpON))
 			{
 			mode_phase=mpOFF;
@@ -213,6 +220,7 @@ if(n_but)
 		}
 	if(but==butT_)
 		{
+		dark_on_cnt=100;
 		if((mode==mTIMER)&&(mode_phase==mpON))
 			{
 			mode_phase=mpOFF;
@@ -221,7 +229,7 @@ if(n_but)
 
 	if(but==butL)
 		{
-		if((mode!=mLOOP)||(mode_phase==mpOFF))
+		if(((mode!=mLOOP)||(mode_phase==mpOFF))&&(main_cnt_ee))
 			{
 			mode=mLOOP;
 			loop_wrk_cnt=SEC_IN_MIN*MIN_IN_LOOP;
@@ -229,6 +237,7 @@ if(n_but)
 		}
 	if(but==butL_)
 		{
+		dark_on_cnt=100;	
 		if((mode==mLOOP))
 			{
 			mode_phase=mpOFF;
@@ -238,9 +247,14 @@ if(n_but)
 		}		
 	if(but==butKTL_)
 		{
-		main_cnt_ee=MAX_RESURS;
-		second_cnt=0;
+		main_cnt_reset++;
+			if(main_cnt_reset>=3)
+				{
+				main_cnt_ee=MAX_RESURS;
+				second_cnt=0;
+				}
 		}
+	else main_cnt_reset=0;
 	}
 n_but=0;
 }
