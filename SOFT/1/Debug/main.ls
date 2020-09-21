@@ -405,7 +405,7 @@
 2813  01e0 a103          	cp	a,#3
 2814  01e2 2512          	jrult	L7451
 2815                     ; 253 				main_cnt_ee=MAX_RESURS;
-2817  01e4 ae1f40        	ldw	x,#8000
+2817  01e4 ae2328        	ldw	x,#9000
 2818  01e7 89            	pushw	x
 2819  01e8 ae4002        	ldw	x,#_main_cnt_ee
 2820  01eb cd0000        	call	c_eewrw
@@ -932,132 +932,132 @@
 3819  04c9 b60b          	ld	a,_mode_phase
 3820  04cb a102          	cp	a,#2
 3821  04cd 2610          	jrne	L1612
-3822                     ; 472 		ind_out[0]=0b00001001;
-3824  04cf 35090000      	mov	_ind_out,#9
-3825                     ; 473 		ind_out[1]=0b00001010;
-3827  04d3 350a0001      	mov	_ind_out+1,#10
-3828                     ; 474 		ind_out[2]=0b00010000;
-3830  04d7 35100002      	mov	_ind_out+2,#16
-3831                     ; 475 		ind_out[3]=0b10010100;
-3833  04db 35940003      	mov	_ind_out+3,#148
+3822                     ; 476 		ind_out[0]=0b11111111;
+3824  04cf 35ff0000      	mov	_ind_out,#255
+3825                     ; 477 		ind_out[1]=0b11111011;
+3827  04d3 35fb0001      	mov	_ind_out+1,#251
+3828                     ; 478 		ind_out[2]=0b11111011;
+3830  04d7 35fb0002      	mov	_ind_out+2,#251
+3831                     ; 479 		ind_out[3]=0b11111111;		
+3833  04db 35ff0003      	mov	_ind_out+3,#255
 3834  04df               L1612:
-3835                     ; 481 }
+3835                     ; 484 }
 3838  04df 81            	ret
-3861                     ; 484 void gpio_init(void){
+3861                     ; 487 void gpio_init(void){
 3862                     	switch	.text
 3863  04e0               _gpio_init:
-3867                     ; 485 	GPIOA->DDR|=((1<<1)|(1<<2));
+3867                     ; 488 	GPIOA->DDR|=((1<<1)|(1<<2));
 3869  04e0 c65002        	ld	a,20482
 3870  04e3 aa06          	or	a,#6
 3871  04e5 c75002        	ld	20482,a
-3872                     ; 486 	GPIOA->CR1|=((1<<1)|(1<<2));
+3872                     ; 489 	GPIOA->CR1|=((1<<1)|(1<<2));
 3874  04e8 c65003        	ld	a,20483
 3875  04eb aa06          	or	a,#6
 3876  04ed c75003        	ld	20483,a
-3877                     ; 487 	GPIOA->CR2&=~((1<<1)|(1<<2));
+3877                     ; 490 	GPIOA->CR2&=~((1<<1)|(1<<2));
 3879  04f0 c65004        	ld	a,20484
 3880  04f3 a4f9          	and	a,#249
 3881  04f5 c75004        	ld	20484,a
-3882                     ; 488 	GPIOD->DDR|=((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
+3882                     ; 491 	GPIOD->DDR|=((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
 3884  04f8 c65011        	ld	a,20497
 3885  04fb aa7c          	or	a,#124
 3886  04fd c75011        	ld	20497,a
-3887                     ; 489 	GPIOD->CR1&=~((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
+3887                     ; 492 	GPIOD->CR1&=~((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
 3889  0500 c65012        	ld	a,20498
 3890  0503 a483          	and	a,#131
 3891  0505 c75012        	ld	20498,a
-3892                     ; 490 	GPIOD->CR2&=~((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
+3892                     ; 493 	GPIOD->CR2&=~((1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6));
 3894  0508 c65013        	ld	a,20499
 3895  050b a483          	and	a,#131
 3896  050d c75013        	ld	20499,a
-3897                     ; 494 	GPIOB->CR1&=~((1<<0)|(1<<1)|(1<<2)|(1<<3));
+3897                     ; 497 	GPIOB->CR1&=~((1<<0)|(1<<1)|(1<<2)|(1<<3));
 3899  0510 c65008        	ld	a,20488
 3900  0513 a4f0          	and	a,#240
 3901  0515 c75008        	ld	20488,a
-3902                     ; 495 	GPIOB->CR2&=~((1<<0)|(1<<1)|(1<<2)|(1<<3));
+3902                     ; 498 	GPIOB->CR2&=~((1<<0)|(1<<1)|(1<<2)|(1<<3));
 3904  0518 c65009        	ld	a,20489
 3905  051b a4f0          	and	a,#240
 3906  051d c75009        	ld	20489,a
-3907                     ; 496 	GPIOB->DDR|=((1<<0)|(1<<1)|(1<<2)|(1<<3));
+3907                     ; 499 	GPIOB->DDR|=((1<<0)|(1<<1)|(1<<2)|(1<<3));
 3909  0520 c65007        	ld	a,20487
 3910  0523 aa0f          	or	a,#15
 3911  0525 c75007        	ld	20487,a
-3912                     ; 499 	GPIOC->CR1|=((1<<3));
+3912                     ; 502 	GPIOC->CR1|=((1<<3));
 3914  0528 7216500d      	bset	20493,#3
-3915                     ; 500 	GPIOC->CR2&=~((1<<3));
+3915                     ; 503 	GPIOC->CR2&=~((1<<3));
 3917  052c 7217500e      	bres	20494,#3
-3918                     ; 501 	GPIOB->CR1|=((1<<4)|(1<<5));
+3918                     ; 504 	GPIOB->CR1|=((1<<4)|(1<<5));
 3920  0530 c65008        	ld	a,20488
 3921  0533 aa30          	or	a,#48
 3922  0535 c75008        	ld	20488,a
-3923                     ; 502 	GPIOB->CR2&=~((1<<4)|(1<<5));
+3923                     ; 505 	GPIOB->CR2&=~((1<<4)|(1<<5));
 3925  0538 c65009        	ld	a,20489
 3926  053b a4cf          	and	a,#207
 3927  053d c75009        	ld	20489,a
-3928                     ; 505 	GPIOC->CR1&=~0xfe;
+3928                     ; 508 	GPIOC->CR1&=~0xfe;
 3930  0540 c6500d        	ld	a,20493
 3931  0543 a401          	and	a,#1
 3932  0545 c7500d        	ld	20493,a
-3933                     ; 506 	GPIOC->CR2&=~0xfe;
+3933                     ; 509 	GPIOC->CR2&=~0xfe;
 3935  0548 c6500e        	ld	a,20494
 3936  054b a401          	and	a,#1
 3937  054d c7500e        	ld	20494,a
-3938                     ; 507 	GPIOC->DDR|=0xfe;
+3938                     ; 510 	GPIOC->DDR|=0xfe;
 3940  0550 c6500c        	ld	a,20492
 3941  0553 aafe          	or	a,#254
 3942  0555 c7500c        	ld	20492,a
-3943                     ; 512 	GPIOA->DDR|=(1<<3);
+3943                     ; 515 	GPIOA->DDR|=(1<<3);
 3945  0558 72165002      	bset	20482,#3
-3946                     ; 513 	GPIOA->CR1|=(1<<3);
+3946                     ; 516 	GPIOA->CR1|=(1<<3);
 3948  055c 72165003      	bset	20483,#3
-3949                     ; 514 	GPIOA->CR2&=~(1<<3);
+3949                     ; 517 	GPIOA->CR2&=~(1<<3);
 3951  0560 72175004      	bres	20484,#3
-3952                     ; 517 	GPIOB->DDR&=~(1<<5);	
+3952                     ; 520 	GPIOB->DDR&=~(1<<5);	
 3954  0564 721b5007      	bres	20487,#5
-3955                     ; 518 	GPIOB->CR1|=(1<<5);
+3955                     ; 521 	GPIOB->CR1|=(1<<5);
 3957  0568 721a5008      	bset	20488,#5
-3958                     ; 519 	GPIOB->CR2&=~(1<<5);
+3958                     ; 522 	GPIOB->CR2&=~(1<<5);
 3960  056c 721b5009      	bres	20489,#5
-3961                     ; 521 	GPIOB->ODR|=0x0f;
+3961                     ; 524 	GPIOB->ODR|=0x0f;
 3963  0570 c65005        	ld	a,20485
 3964  0573 aa0f          	or	a,#15
 3965  0575 c75005        	ld	20485,a
-3966                     ; 522 }
+3966                     ; 525 }
 3969  0578 81            	ret
-3992                     ; 525 void t4_init(void){
+3992                     ; 528 void t4_init(void){
 3993                     	switch	.text
 3994  0579               _t4_init:
-3998                     ; 526 	TIM4->PSCR = 7;
+3998                     ; 529 	TIM4->PSCR = 7;
 4000  0579 35075347      	mov	21319,#7
-4001                     ; 527 	TIM4->ARR= 123;
+4001                     ; 530 	TIM4->ARR= 123;
 4003  057d 357b5348      	mov	21320,#123
-4004                     ; 528 	TIM4->IER|= TIM4_IER_UIE;					// enable break interrupt
+4004                     ; 531 	TIM4->IER|= TIM4_IER_UIE;					// enable break interrupt
 4006  0581 72105343      	bset	21315,#0
-4007                     ; 530 	TIM4->CR1=(TIM4_CR1_URS | TIM4_CR1_CEN | TIM4_CR1_ARPE);	
+4007                     ; 533 	TIM4->CR1=(TIM4_CR1_URS | TIM4_CR1_CEN | TIM4_CR1_ARPE);	
 4009  0585 35855340      	mov	21312,#133
-4010                     ; 531 }	
+4010                     ; 534 }	
 4013  0589 81            	ret
-4055                     ; 537 @far @interrupt void TIM4_UPD_Interrupt (void) 
-4055                     ; 538 {
+4055                     ; 540 @far @interrupt void TIM4_UPD_Interrupt (void) 
+4055                     ; 541 {
 4057                     	switch	.text
 4058  058a               f_TIM4_UPD_Interrupt:
-4062                     ; 540 ind_cnt++;
+4062                     ; 543 ind_cnt++;
 4064  058a 3c32          	inc	_ind_cnt
-4065                     ; 542 if(ind_cnt>=5)ind_cnt=0;
+4065                     ; 545 if(ind_cnt>=5)ind_cnt=0;
 4067  058c b632          	ld	a,_ind_cnt
 4068  058e a105          	cp	a,#5
 4069  0590 2502          	jrult	L5522
 4072  0592 3f32          	clr	_ind_cnt
 4073  0594               L5522:
-4074                     ; 544 GPIOC->ODR|=0xf0;
+4074                     ; 547 GPIOC->ODR|=0xf0;
 4076  0594 c6500a        	ld	a,20490
 4077  0597 aaf0          	or	a,#240
 4078  0599 c7500a        	ld	20490,a
-4079                     ; 547 GPIOA->ODR|=0x06;
+4079                     ; 550 GPIOA->ODR|=0x06;
 4081  059c c65000        	ld	a,20480
 4082  059f aa06          	or	a,#6
 4083  05a1 c75000        	ld	20480,a
-4084                     ; 548 GPIOA->ODR&=(ind_out[ind_cnt]<<1)|0xf9;
+4084                     ; 551 GPIOA->ODR&=(ind_out[ind_cnt]<<1)|0xf9;
 4086  05a4 b632          	ld	a,_ind_cnt
 4087  05a6 5f            	clrw	x
 4088  05a7 97            	ld	xl,a
@@ -1066,11 +1066,11 @@
 4091  05ab aaf9          	or	a,#249
 4092  05ad c45000        	and	a,20480
 4093  05b0 c75000        	ld	20480,a
-4094                     ; 549 GPIOD->ODR|=0x7c;
+4094                     ; 552 GPIOD->ODR|=0x7c;
 4096  05b3 c6500f        	ld	a,20495
 4097  05b6 aa7c          	or	a,#124
 4098  05b8 c7500f        	ld	20495,a
-4099                     ; 550 GPIOD->ODR&=(ind_out[ind_cnt])|0x83;
+4099                     ; 553 GPIOD->ODR&=(ind_out[ind_cnt])|0x83;
 4101  05bb b632          	ld	a,_ind_cnt
 4102  05bd 5f            	clrw	x
 4103  05be 97            	ld	xl,a
@@ -1078,7 +1078,7 @@
 4105  05c1 aa83          	or	a,#131
 4106  05c3 c4500f        	and	a,20495
 4107  05c6 c7500f        	ld	20495,a
-4108                     ; 552 if(dark_on_cnt)dark_on_cnt--;
+4108                     ; 555 if(dark_on_cnt)dark_on_cnt--;
 4110  05c9 be1c          	ldw	x,_dark_on_cnt
 4111  05cb 2709          	jreq	L7522
 4114  05cd be1c          	ldw	x,_dark_on_cnt
@@ -1086,7 +1086,7 @@
 4116  05d2 bf1c          	ldw	_dark_on_cnt,x
 4118  05d4 2014          	jra	L1622
 4119  05d6               L7522:
-4120                     ; 553 else GPIOC->ODR&=~(0x10<<ind_cnt);
+4120                     ; 556 else GPIOC->ODR&=~(0x10<<ind_cnt);
 4122  05d6 b632          	ld	a,_ind_cnt
 4123  05d8 5f            	clrw	x
 4124  05d9 97            	ld	xl,a
@@ -1102,146 +1102,146 @@
 4134  05e4 c4500a        	and	a,20490
 4135  05e7 c7500a        	ld	20490,a
 4136  05ea               L1622:
-4137                     ; 555 if(ind_cnt==4)
+4137                     ; 558 if(ind_cnt==4)
 4139  05ea b632          	ld	a,_ind_cnt
 4140  05ec a104          	cp	a,#4
 4141  05ee 2604          	jrne	L3622
-4142                     ; 557 	GPIOC->ODR&=~(0x10);
+4142                     ; 560 	GPIOC->ODR&=~(0x10);
 4144  05f0 7219500a      	bres	20490,#4
 4145  05f4               L3622:
-4146                     ; 560 GPIOC->CR1|=((1<<3));
+4146                     ; 563 GPIOC->CR1|=((1<<3));
 4148  05f4 7216500d      	bset	20493,#3
-4149                     ; 561 GPIOC->CR2&=~((1<<3));
+4149                     ; 564 GPIOC->CR2&=~((1<<3));
 4151  05f8 7217500e      	bres	20494,#3
-4152                     ; 562 GPIOB->CR1|=((1<<4)|(1<<5));
+4152                     ; 565 GPIOB->CR1|=((1<<4)|(1<<5));
 4154  05fc c65008        	ld	a,20488
 4155  05ff aa30          	or	a,#48
 4156  0601 c75008        	ld	20488,a
-4157                     ; 563 GPIOB->CR2&=~((1<<4)|(1<<5));
+4157                     ; 566 GPIOB->CR2&=~((1<<4)|(1<<5));
 4159  0604 c65009        	ld	a,20489
 4160  0607 a4cf          	and	a,#207
 4161  0609 c75009        	ld	20489,a
-4162                     ; 565 if(ind_cnt==4)	
+4162                     ; 568 if(ind_cnt==4)	
 4164  060c b632          	ld	a,_ind_cnt
 4165  060e a104          	cp	a,#4
 4166  0610 260e          	jrne	L5622
-4167                     ; 567 	GPIOC->DDR&=~(1<<3);
+4167                     ; 570 	GPIOC->DDR&=~(1<<3);
 4169  0612 7217500c      	bres	20492,#3
-4170                     ; 568 	GPIOB->DDR&=~((1<<4)|(1<<5));
+4170                     ; 571 	GPIOB->DDR&=~((1<<4)|(1<<5));
 4172  0616 c65007        	ld	a,20487
 4173  0619 a4cf          	and	a,#207
 4174  061b c75007        	ld	20487,a
 4176  061e 2010          	jra	L7622
 4177  0620               L5622:
-4178                     ; 570 else if(ind_cnt==0)	
+4178                     ; 573 else if(ind_cnt==0)	
 4180  0620 3d32          	tnz	_ind_cnt
 4181  0622 260c          	jrne	L7622
-4182                     ; 572 	GPIOC->DDR|=((1<<3));
+4182                     ; 575 	GPIOC->DDR|=((1<<3));
 4184  0624 7216500c      	bset	20492,#3
-4185                     ; 573 	GPIOB->DDR|=((1<<4)|(1<<5));
+4185                     ; 576 	GPIOB->DDR|=((1<<4)|(1<<5));
 4187  0628 c65007        	ld	a,20487
 4188  062b aa30          	or	a,#48
 4189  062d c75007        	ld	20487,a
 4190  0630               L7622:
-4191                     ; 582 if(ind_cnt==0)	
+4191                     ; 585 if(ind_cnt==0)	
 4193  0630 3d32          	tnz	_ind_cnt
 4194  0632 2632          	jrne	L3722
-4195                     ; 584 	if(led_stat&0x01)	GPIOC->ODR&=~(1<<3);
+4195                     ; 587 	if(led_stat&0x01)	GPIOC->ODR&=~(1<<3);
 4197  0634 b61e          	ld	a,_led_stat
 4198  0636 a501          	bcp	a,#1
 4199  0638 2706          	jreq	L5722
 4202  063a 7217500a      	bres	20490,#3
 4204  063e 2004          	jra	L7722
 4205  0640               L5722:
-4206                     ; 585 	else 			GPIOC->ODR|=(1<<3);
+4206                     ; 588 	else 			GPIOC->ODR|=(1<<3);
 4208  0640 7216500a      	bset	20490,#3
 4209  0644               L7722:
-4210                     ; 586 	if(led_stat&0x02)	GPIOB->ODR&=~(1<<4);
+4210                     ; 589 	if(led_stat&0x02)	GPIOB->ODR&=~(1<<4);
 4212  0644 b61e          	ld	a,_led_stat
 4213  0646 a502          	bcp	a,#2
 4214  0648 2706          	jreq	L1032
 4217  064a 72195005      	bres	20485,#4
 4219  064e 2004          	jra	L3032
 4220  0650               L1032:
-4221                     ; 587 	else 			GPIOB->ODR|=(1<<4);
+4221                     ; 590 	else 			GPIOB->ODR|=(1<<4);
 4223  0650 72185005      	bset	20485,#4
 4224  0654               L3032:
-4225                     ; 588 	if(led_stat&0x04)	GPIOB->ODR&=~(1<<5);
+4225                     ; 591 	if(led_stat&0x04)	GPIOB->ODR&=~(1<<5);
 4227  0654 b61e          	ld	a,_led_stat
 4228  0656 a504          	bcp	a,#4
 4229  0658 2706          	jreq	L5032
 4232  065a 721b5005      	bres	20485,#5
 4234  065e 203f          	jra	L1132
 4235  0660               L5032:
-4236                     ; 589 	else 			GPIOB->ODR|=(1<<5);
+4236                     ; 592 	else 			GPIOB->ODR|=(1<<5);
 4238  0660 721a5005      	bset	20485,#5
 4239  0664 2039          	jra	L1132
 4240  0666               L3722:
-4241                     ; 591 else if(ind_cnt==4)	
+4241                     ; 594 else if(ind_cnt==4)	
 4243  0666 b632          	ld	a,_ind_cnt
 4244  0668 a104          	cp	a,#4
 4245  066a 2633          	jrne	L1132
-4246                     ; 593 	if(!(GPIOC->IDR&(1<<3)))but_stat&=0xfe;
+4246                     ; 596 	if(!(GPIOC->IDR&(1<<3)))but_stat&=0xfe;
 4248  066c c6500b        	ld	a,20491
 4249  066f a508          	bcp	a,#8
 4250  0671 2606          	jrne	L5132
 4253  0673 7211000e      	bres	_but_stat,#0
 4255  0677 2004          	jra	L7132
 4256  0679               L5132:
-4257                     ; 594 	else but_stat|=0x01;
+4257                     ; 597 	else but_stat|=0x01;
 4259  0679 7210000e      	bset	_but_stat,#0
 4260  067d               L7132:
-4261                     ; 595 	if(!(GPIOB->IDR&(1<<4)))but_stat&=0xfd;
+4261                     ; 598 	if(!(GPIOB->IDR&(1<<4)))but_stat&=0xfd;
 4263  067d c65006        	ld	a,20486
 4264  0680 a510          	bcp	a,#16
 4265  0682 2606          	jrne	L1232
 4268  0684 7213000e      	bres	_but_stat,#1
 4270  0688 2004          	jra	L3232
 4271  068a               L1232:
-4272                     ; 596 	else but_stat|=0x02;
+4272                     ; 599 	else but_stat|=0x02;
 4274  068a 7212000e      	bset	_but_stat,#1
 4275  068e               L3232:
-4276                     ; 597 	if(!(GPIOB->IDR&(1<<5)))but_stat&=0xfb;
+4276                     ; 600 	if(!(GPIOB->IDR&(1<<5)))but_stat&=0xfb;
 4278  068e c65006        	ld	a,20486
 4279  0691 a520          	bcp	a,#32
 4280  0693 2606          	jrne	L5232
 4283  0695 7215000e      	bres	_but_stat,#2
 4285  0699 2004          	jra	L1132
 4286  069b               L5232:
-4287                     ; 598 	else but_stat|=0x04;	
+4287                     ; 601 	else but_stat|=0x04;	
 4289  069b 7214000e      	bset	_but_stat,#2
 4290  069f               L1132:
-4291                     ; 601 b1000Hz=1;
+4291                     ; 604 b1000Hz=1;
 4293  069f 35010000      	mov	_b1000Hz,#1
-4294                     ; 603 if(++t0_cnt0>=10)
+4294                     ; 606 if(++t0_cnt0>=10)
 4296  06a3 725c0006      	inc	_t0_cnt0
 4297  06a7 c60006        	ld	a,_t0_cnt0
 4298  06aa a10a          	cp	a,#10
 4299  06ac 2575          	jrult	L1332
-4300                     ; 605 	t0_cnt0=0;
+4300                     ; 608 	t0_cnt0=0;
 4302  06ae 725f0006      	clr	_t0_cnt0
-4303                     ; 606     	b100Hz=1;
+4303                     ; 609     	b100Hz=1;
 4305  06b2 35010001      	mov	_b100Hz,#1
-4306                     ; 607 	if(++t0_cnt1>=10)
+4306                     ; 610 	if(++t0_cnt1>=10)
 4308  06b6 725c0007      	inc	_t0_cnt1
 4309  06ba c60007        	ld	a,_t0_cnt1
 4310  06bd a10a          	cp	a,#10
 4311  06bf 2508          	jrult	L3332
-4312                     ; 609 		t0_cnt1=0;
+4312                     ; 612 		t0_cnt1=0;
 4314  06c1 725f0007      	clr	_t0_cnt1
-4315                     ; 610 		b10Hz=1;
+4315                     ; 613 		b10Hz=1;
 4317  06c5 35010002      	mov	_b10Hz,#1
 4318  06c9               L3332:
-4319                     ; 613 	if(++t0_cnt2>=20)
+4319                     ; 616 	if(++t0_cnt2>=20)
 4321  06c9 725c0008      	inc	_t0_cnt2
 4322  06cd c60008        	ld	a,_t0_cnt2
 4323  06d0 a114          	cp	a,#20
 4324  06d2 2513          	jrult	L5332
-4325                     ; 615 		t0_cnt2=0;
+4325                     ; 618 		t0_cnt2=0;
 4327  06d4 725f0008      	clr	_t0_cnt2
-4328                     ; 616 		b5Hz=1;
+4328                     ; 619 		b5Hz=1;
 4330  06d8 35010003      	mov	_b5Hz,#1
-4331                     ; 617 		bFL5=!bFL5;
+4331                     ; 620 		bFL5=!bFL5;
 4333  06dc 3d22          	tnz	_bFL5
 4334  06de 2604          	jrne	L05
 4335  06e0 a601          	ld	a,#1
@@ -1251,16 +1251,16 @@
 4339  06e5               L25:
 4340  06e5 b722          	ld	_bFL5,a
 4341  06e7               L5332:
-4342                     ; 620 	if(++t0_cnt3>=50)
+4342                     ; 623 	if(++t0_cnt3>=50)
 4344  06e7 725c0009      	inc	_t0_cnt3
 4345  06eb c60009        	ld	a,_t0_cnt3
 4346  06ee a132          	cp	a,#50
 4347  06f0 2513          	jrult	L7332
-4348                     ; 622 		t0_cnt3=0;
+4348                     ; 625 		t0_cnt3=0;
 4350  06f2 725f0009      	clr	_t0_cnt3
-4351                     ; 623 		b2Hz=1;
+4351                     ; 626 		b2Hz=1;
 4353  06f6 35010004      	mov	_b2Hz,#1
-4354                     ; 624 		bFL2=!bFL2;		
+4354                     ; 627 		bFL2=!bFL2;		
 4356  06fa 3d21          	tnz	_bFL2
 4357  06fc 2604          	jrne	L45
 4358  06fe a601          	ld	a,#1
@@ -1270,16 +1270,16 @@
 4362  0703               L65:
 4363  0703 b721          	ld	_bFL2,a
 4364  0705               L7332:
-4365                     ; 627 	if(++t0_cnt4>=100)
+4365                     ; 630 	if(++t0_cnt4>=100)
 4367  0705 725c000a      	inc	_t0_cnt4
 4368  0709 c6000a        	ld	a,_t0_cnt4
 4369  070c a164          	cp	a,#100
 4370  070e 2513          	jrult	L1332
-4371                     ; 629 		t0_cnt4=0;
+4371                     ; 632 		t0_cnt4=0;
 4373  0710 725f000a      	clr	_t0_cnt4
-4374                     ; 630 		b1Hz=1;
+4374                     ; 633 		b1Hz=1;
 4376  0714 35010005      	mov	_b1Hz,#1
-4377                     ; 631 		bFL1=!bFL1;
+4377                     ; 634 		bFL1=!bFL1;
 4379  0718 3d20          	tnz	_bFL1
 4380  071a 2604          	jrne	L06
 4381  071c a601          	ld	a,#1
@@ -1289,81 +1289,81 @@
 4385  0721               L26:
 4386  0721 b720          	ld	_bFL1,a
 4387  0723               L1332:
-4388                     ; 637 TIM4->SR1&=~TIM4_SR1_UIF;			// disable break interrupt
+4388                     ; 640 TIM4->SR1&=~TIM4_SR1_UIF;			// disable break interrupt
 4390  0723 72115344      	bres	21316,#0
-4391                     ; 638 return;
+4391                     ; 641 return;
 4394  0727 80            	iret
-4436                     ; 645 main()
-4436                     ; 646 {
+4436                     ; 648 main()
+4436                     ; 649 {
 4438                     	switch	.text
 4439  0728               _main:
-4443                     ; 647 CLK->CKDIVR=0;
+4443                     ; 650 CLK->CKDIVR=0;
 4445  0728 725f50c6      	clr	20678
-4446                     ; 649 gpio_init();
+4446                     ; 652 gpio_init();
 4448  072c cd04e0        	call	_gpio_init
-4450                     ; 653 FLASH_DUKR=0xae;
+4450                     ; 656 FLASH_DUKR=0xae;
 4452  072f 35ae5064      	mov	_FLASH_DUKR,#174
-4453                     ; 654 FLASH_DUKR=0x56;	
+4453                     ; 657 FLASH_DUKR=0x56;	
 4455  0733 35565064      	mov	_FLASH_DUKR,#86
-4456                     ; 703 t4_init();
+4456                     ; 706 t4_init();
 4458  0737 cd0579        	call	_t4_init
-4460                     ; 704 enableInterrupts();	
+4460                     ; 707 enableInterrupts();	
 4463  073a 9a            rim
-4465                     ; 706 mode=mKONST;
+4465                     ; 709 mode=mKONST;
 4468  073b 3f0c          	clr	_mode
-4469                     ; 707 mode_phase=mpOFF;
+4469                     ; 710 mode_phase=mpOFF;
 4471  073d 3f0b          	clr	_mode_phase
 4472  073f               L3532:
-4473                     ; 713 	if(b1000Hz)
+4473                     ; 716 	if(b1000Hz)
 4475  073f 725d0000      	tnz	_b1000Hz
 4476  0743 270a          	jreq	L7532
-4477                     ; 715 		b1000Hz=0;
+4477                     ; 718 		b1000Hz=0;
 4479  0745 725f0000      	clr	_b1000Hz
-4480                     ; 716 		but_drv();
+4480                     ; 719 		but_drv();
 4482  0749 cd01f9        	call	_but_drv
-4484                     ; 717 		but_an();
+4484                     ; 720 		but_an();
 4486  074c cd00dd        	call	_but_an
 4488  074f               L7532:
-4489                     ; 720 	if(b100Hz)
+4489                     ; 723 	if(b100Hz)
 4491  074f 725d0001      	tnz	_b100Hz
 4492  0753 2707          	jreq	L1632
-4493                     ; 722 		b100Hz=0;
+4493                     ; 725 		b100Hz=0;
 4495  0755 725f0001      	clr	_b100Hz
-4496                     ; 723 		led_hndl();	
+4496                     ; 726 		led_hndl();	
 4498  0759 cd039a        	call	_led_hndl
 4500  075c               L1632:
-4501                     ; 727 	if(b10Hz)
+4501                     ; 730 	if(b10Hz)
 4503  075c 725d0002      	tnz	_b10Hz
 4504  0760 270d          	jreq	L3632
-4505                     ; 729 		b10Hz=0;
+4505                     ; 732 		b10Hz=0;
 4507  0762 725f0002      	clr	_b10Hz
-4508                     ; 730 		ind_hndl();	
+4508                     ; 733 		ind_hndl();	
 4510  0766 cd03f1        	call	_ind_hndl
-4512                     ; 731 		out_hndl();	
+4512                     ; 734 		out_hndl();	
 4514  0769 cd00a1        	call	_out_hndl
-4516                     ; 732 		out_drv();
+4516                     ; 735 		out_drv();
 4518  076c cd00cc        	call	_out_drv
 4520  076f               L3632:
-4521                     ; 736 	if(b5Hz)
+4521                     ; 739 	if(b5Hz)
 4523  076f 725d0003      	tnz	_b5Hz
 4524  0773 2704          	jreq	L5632
-4525                     ; 738 		b5Hz=0;
+4525                     ; 741 		b5Hz=0;
 4527  0775 725f0003      	clr	_b5Hz
 4528  0779               L5632:
-4529                     ; 742 	if(b2Hz)
+4529                     ; 745 	if(b2Hz)
 4531  0779 725d0004      	tnz	_b2Hz
 4532  077d 2704          	jreq	L7632
-4533                     ; 744 		b2Hz=0;
+4533                     ; 747 		b2Hz=0;
 4535  077f 725f0004      	clr	_b2Hz
 4536  0783               L7632:
-4537                     ; 748 	if(b1Hz)
+4537                     ; 751 	if(b1Hz)
 4539  0783 725d0005      	tnz	_b1Hz
 4540  0787 27b6          	jreq	L3532
-4541                     ; 750 		b1Hz=0;
+4541                     ; 753 		b1Hz=0;
 4543  0789 725f0005      	clr	_b1Hz
-4544                     ; 751 		led_stat=0;
+4544                     ; 754 		led_stat=0;
 4546  078d 3f1e          	clr	_led_stat
-4547                     ; 752 		time_hndl();
+4547                     ; 755 		time_hndl();
 4549  078f cd0000        	call	_time_hndl
 4551  0792 20ab          	jra	L3532
 5073                     	xdef	_main

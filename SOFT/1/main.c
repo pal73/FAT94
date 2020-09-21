@@ -61,7 +61,7 @@ out_state_enum out_state;
 #define SEC_IN_MIN	20
 #define MIN_IN_LOOP	10
 */
-#define MAX_RESURS	8000
+#define MAX_RESURS	9000
 #define SEC_IN_HOUR	3600
 #define SEC_IN_MIN	60
 #define MIN_IN_LOOP	60
@@ -469,11 +469,14 @@ else if(mode==mLOOP)
 		}
 	else if(mode_phase==mpPAUSE)	
 		{
-		ind_out[0]=0b00001001;
+		/*ind_out[0]=0b00001001;
 		ind_out[1]=0b00001010;
 		ind_out[2]=0b00010000;
-		ind_out[3]=0b10010100;
-		
+		ind_out[3]=0b10010100;*/
+		ind_out[0]=0b11111111;
+		ind_out[1]=0b11111011;
+		ind_out[2]=0b11111011;
+		ind_out[3]=0b11111111;		
 		
 		
 		}
